@@ -1,9 +1,9 @@
 <?php  ?>
 <footer class="main-footer">
-  <div class="pull-right hidden-xs">
+  <!-- <div class="pull-right hidden-xs">
     <b>Version</b> 2.4.13
-  </div>
-  <strong>Copyright &copy; 2023 <a href="#">Sistem Informasi</a>.</strong> All rights
+  </div> -->
+  <strong>Copyright &copy; 2023 <a href="#">Politeknik Kesehatan Permata Indonesia Yogyakarta</a>.</strong> All rights
   reserved.
 </footer>
 </div>
@@ -17,7 +17,7 @@
 <!-- SlimScroll -->
 <script src="<?php echo base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
-<script src="<?php echo base_url() ?>assets/bower_components/chart.js/Chart.js""></script>
+<script src="<?php echo base_url() ?>assets/bower_components/chart.js/Chart.js"></script>
 <!-- FastClick -->
 <script src=" <?php echo base_url() ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->

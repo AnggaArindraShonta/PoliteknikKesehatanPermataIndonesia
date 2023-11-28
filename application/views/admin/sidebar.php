@@ -20,52 +20,16 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
 
-      <li <?php if ("/sp_padi/admin" == $_SERVER['REQUEST_URI']) {
+      <li <?php if ("/pkpi/admin" == $_SERVER['REQUEST_URI']) {
           ?> class="active" <?php } ?>>
         <a href="<?php echo base_url() ?>admin">
           <i class="fa fa-home"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li <?php if ("/sp_padi/admin/gejala" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/gejala">
-          <i class="fa fa-stethoscope"></i> <span>Gejala</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/penyakit" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/penyakit">
-          <i class="fa fa-medkit"></i> <span>Penyakit</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/basispengetahuan" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/basispengetahuan">
-          <i class="fa fa-database"></i> <span>Basis Pengetahuan</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/gejalacf" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/gejalacf">
-          <i class="fa fa-stethoscope"></i> <span>Gejala CF</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/penyakitcf" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/penyakitcf">
-          <i class="fa fa-medkit"></i> <span>Penyakit CF</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/aturan" == $_SERVER['REQUEST_URI']) {
-          ?> class="active" <?php } ?>>
-        <a href="<?php echo base_url() ?>admin/aturan">
-          <i class="fa fa-database"></i> <span>Aturan CF</span>
-        </a>
-      </li>
-      <li <?php if ("/sp_padi/admin/member" == $_SERVER['REQUEST_URI']) {
+      <li <?php if ("/pkpi/admin/member" == $_SERVER['REQUEST_URI']) {
           ?> class="active" <?php } ?>>
         <a href="<?php echo base_url() ?>admin/member">
-          <i class="fa fa-user"></i> <span>Member</span>
+          <i class="fa fa-users"></i> <span>Dosen</span>
         </a>
       </li>
     </ul>

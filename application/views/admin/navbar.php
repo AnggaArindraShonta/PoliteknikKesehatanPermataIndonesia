@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Sistem Pakar Penyakit Padi</title>
+  <title>Admin Bimbingan Akademik</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/skins/_all-skins.min.css">
   <!-- jQuery 3 -->
   <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <link rel="icon" href="<?= base_url() ?>assets/admin/images/logo-pkpi.png" />
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,9 +45,11 @@
       <!-- Logo -->
       <a href="<?php echo base_url() ?>admin/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>Padi</b></span>
+        <span class="logo-mini"><b>Admin</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SP</b> Penyakit Padi</span>
+        <span class="logo-lg">
+          <h4><b>Bimbingan Akademik</b></h4>
+        </span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">

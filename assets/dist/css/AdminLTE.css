@@ -18,6 +18,16 @@ body {
 .layout-boxed body {
   height: 100%;
 }
+#materi_bimbingan {
+width: 100%; /* Lebar textarea mengikuti lebar parent atau container */
+box-sizing: border-box; /* Termasuk padding dan border dalam perhitungan lebar */
+border-radius: 4px; border: 1px solid #ccc;
+}
+#tindak_lanjut {
+width: 100%; /* Lebar textarea mengikuti lebar parent atau container */
+box-sizing: border-box; /* Termasuk padding dan border dalam perhitungan lebar */
+border-radius: 4px; border: 1px solid #ccc;
+}
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;

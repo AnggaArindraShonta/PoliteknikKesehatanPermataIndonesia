@@ -40,583 +40,15 @@ class model_admin extends CI_Model
 		return $return;
 	}
 
-	function get_all_gejala()
-	{
-		$this->db->select('*');
-		$this->db->from('gejala');
-		$this->db->order_by('kode_gejala', 'ASC');
-		return $this->db->get();
-	}
-
-	function get_all_gejalacf()
-	{
-		$this->db->select('*');
-		$this->db->from('gejalacf');
-		$this->db->order_by('kode_gejalacf', 'ASC');
-		return $this->db->get();
-	}
-
-	function get_penyakit($kode_penyakit)
+	function get_member($id_member)
 	{
 
 		$this->db->select('*');
-		$this->db->from('penyakit');
-		$this->db->where('kode_penyakit', $kode_penyakit);
+		$this->db->from('member');
+		$this->db->where('id_member', $id_member);
 
 		return $this->db->get();
 	}
-
-	function get_penyakitcf($kode_penyakitcf)
-	{
-
-		$this->db->select('*');
-		$this->db->from('penyakitcf');
-		$this->db->where('kode_penyakitcf', $kode_penyakitcf);
-
-		return $this->db->get();
-	}
-
-	function add_gejala()
-	{
-		$this->db->order_by('kode_gejala', 'DESC');
-		$db = $this->db->get('gejala')->row();
-
-		$lastCode = $db->kode_gejala;
-		$lastNumber = (int) substr($lastCode, 1);
-		$newNumber = $lastNumber + 1;
-
-		$char = "G";
-		$newID = $char . $newNumber;
-
-		while ($this->db->get_where('gejala', array('kode_gejala' => $newID))->row()) {
-			$newNumber++;
-			$newID = $char . $newNumber;
-		}
-
-		$data = array(
-			'kode_gejala' => $newID,
-			'gejala' => $this->input->post('gejala')
-		);
-
-		$this->db->insert('gejala', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-
-	function add_gejalacf()
-	{
-		$this->db->order_by('kode_gejalacf', 'DESC');
-		$db = $this->db->get('gejalacf')->row();
-
-		$lastCode = $db->kode_gejalacf;
-		$lastNumber = (int) substr($lastCode, 1);
-		$newNumber = $lastNumber + 1;
-
-		$char = "G";
-		$newID = $char . $newNumber;
-
-		while ($this->db->get_where('gejalacf', array('kode_gejalacf' => $newID))->row()) {
-			$newNumber++;
-			$newID = $char . $newNumber;
-		}
-
-		$data = array(
-			'kode_gejalacf' => $newID,
-			'gejalacf' => $this->input->post('gejalacf'),
-			'bobot_pakar' => $this->input->post('bobot_pakar')
-		);
-
-		$this->db->insert('gejalacf', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function delete_gejala()
-	{
-
-		$this->db->where('kode_gejala', $this->input->post('kode_gejala'));
-		$this->db->delete('gejala');
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function delete_gejalacf()
-	{
-		$this->db->where('kode_gejalacf', $this->input->post('kode_gejalacf'));
-		$this->db->delete('gejalacf');
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-
-		return $return;
-	}
-
-	function edit_gejala()
-	{
-
-		$data = array(
-			'gejala' =>  $this->input->post('gejala')
-		);
-		$this->db->where('kode_gejala', $this->input->post('kode_gejala'));
-		$this->db->update('gejala', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function edit_gejalacf()
-	{
-		$data = array(
-			'gejalacf' =>  $this->input->post('gejalacf'),
-			'bobot_pakar' =>  $this->input->post('bobot_pakar')
-		);
-		$this->db->where('kode_gejalacf', $this->input->post('kode_gejalacf'));
-		$this->db->update('gejalacf', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function get_all_penyakit()
-	{
-		$this->db->select('*');
-		$this->db->from('penyakit');
-		$this->db->order_by('kode_penyakit', 'ASC');
-		return $this->db->get();
-	}
-
-	function get_all_penyakitcf()
-	{
-		$this->db->select('*');
-		$this->db->from('penyakitcf');
-		$this->db->order_by('kode_penyakitcf', 'ASC');
-		return $this->db->get();
-	}
-
-	function add_penyakit()
-	{
-		$this->db->order_by('kode_penyakit', 'Desc');
-		$db = $this->db->get('penyakit')->row();
-
-		$lastNumber = (int) substr($db->kode_penyakit, 1);
-		$newNumber = $lastNumber + 1;
-
-		$char = "P";
-		$newID = $char . $newNumber;
-
-		$isDuplicate = true;
-		while ($isDuplicate) {
-			$query = $this->db->get_where('penyakit', array('kode_penyakit' => $newID));
-			if ($query->num_rows() > 0) {
-				$newNumber++;
-				$newID = $char . $newNumber;
-			} else {
-				$isDuplicate = false;
-			}
-		}
-
-		$data = array(
-			'kode_penyakit' => $newID,
-			'penyakit' =>  $this->input->post('penyakit'),
-			'solusi' =>  $this->input->post('solusi')
-		);
-
-		$this->db->insert('penyakit', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function add_penyakitcf()
-	{
-		$this->db->order_by('kode_penyakitcf', 'DESC');
-		$db = $this->db->get('penyakitcf')->row();
-
-		$lastNumber = (int) substr($db->kode_penyakitcf, 1);
-		$newNumber = $lastNumber + 1;
-		$char = "P";
-		$newID = $char . $newNumber;
-
-		$isDuplicate = true;
-		while ($isDuplicate) {
-			$query = $this->db->get_where('penyakitcf', array('kode_penyakitcf' => $newID));
-			if ($query->num_rows() > 0) {
-				$newNumber++;
-				$newID = $char . $newNumber;
-			} else {
-				$isDuplicate = false;
-			}
-		}
-
-		$data = array(
-			'kode_penyakitcf' => $newID,
-			'penyakitcf' => $this->input->post('penyakitcf'),
-			'keterangancf' => $this->input->post('keterangancf'),
-			'solusicf' => $this->input->post('solusicf')
-		);
-
-		if (!empty($_FILES['gambarcf']['name'])) {
-			$config['upload_path'] = 'assets/uploads/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$this->load->library('upload', $config);
-			if ($this->upload->do_upload('gambarcf')) {
-				$uploadData = $this->upload->data();
-				$data['gambarcf'] = $uploadData['file_name'];
-			} else {
-				$error = $this->upload->display_errors();
-				$return = array('result' => 'failed', 'error' => $error);
-				return $return;
-			}
-		}
-		$this->db->insert('penyakitcf', $data);
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-
-	function delete_penyakit()
-	{
-
-		$this->db->where('kode_penyakit', $this->input->post('kode_penyakit'));
-		$this->db->delete('penyakit');
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function delete_penyakitcf()
-	{
-		$this->db->where('kode_penyakitcf', $this->input->post('kode_penyakitcf'));
-		$this->db->delete('penyakitcf');
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function edit_penyakit()
-	{
-
-		$data = array(
-			'penyakit' =>  $this->input->post('penyakit'),
-			'solusi' =>  $this->input->post('solusi')
-		);
-		$this->db->where('kode_penyakit', $this->input->post('kode_penyakit'));
-		$this->db->update('penyakit', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function edit_penyakitcf()
-	{
-		$data = array(
-			'penyakitcf' => $this->input->post('penyakitcf'),
-			'solusicf' => $this->input->post('solusicf')
-		);
-
-		if (!empty($_FILES['gambarcf']['name'])) {
-			$config['upload_path'] = 'assets/uploads/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$this->load->library('upload', $config);
-
-			if ($this->upload->do_upload('gambarcf')) {
-				$oldData = $this->db->get_where('penyakitcf', array('kode_penyakitcf' => $this->input->post('kode_penyakitcf')))->row();
-				if ($oldData->gambarcf) {
-					unlink('assets/uploads/' . $oldData->gambarcf);
-				}
-				$uploadData = $this->upload->data();
-				$data['gambarcf'] = $uploadData['file_name'];
-			} else {
-				$error = $this->upload->display_errors();
-				$return = array('result' => 'failed', 'error' => $error);
-				return $return;
-			}
-		} else {
-			$oldData = $this->db->get_where('penyakitcf', array('kode_penyakitcf' => $this->input->post('kode_penyakitcf')))->row();
-			$data['gambarcf'] = $oldData->gambarcf;
-		}
-
-		$this->db->where('kode_penyakitcf', $this->input->post('kode_penyakitcf'));
-		$this->db->update('penyakitcf', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function get_gejala_penyakit($kode_penyakit)
-	{
-
-		$this->db->select('*');
-		$this->db->from('basispengetahuan');
-		$this->db->join('gejala', 'basispengetahuan.kode_gejala = gejala.kode_gejala', 'left');
-		$this->db->where('kode_penyakit', $kode_penyakit);
-
-		return $this->db->get();
-	}
-
-	function get_gejalacf_penyakitcf($kode_penyakitcf)
-	{
-
-		$this->db->select('*');
-		$this->db->from('aturan');
-		$this->db->join('gejalacf', 'aturan.kode_gejalacf = gejalacf.kode_gejalacf', 'left');
-		$this->db->where('kode_penyakitcf', $kode_penyakitcf);
-
-		return $this->db->get();
-	}
-
-	function get_all_basispengetahuan()
-	{
-		$this->db->select('bp.id, bp.kode_penyakit, p.penyakit, bp.kode_gejala, g.gejala');
-		$this->db->from('basispengetahuan bp');
-		$this->db->join('penyakit p', 'p.kode_penyakit = bp.kode_penyakit');
-		$this->db->join('gejala g', 'g.kode_gejala = bp.kode_gejala');
-
-		return $this->db->get();
-	}
-
-	function get_all_aturan()
-	{
-		$this->db->select('atr.id, atr.kode_penyakitcf, p.penyakitcf, atr.kode_gejalacf, g.gejalacf, atr.cfaturan');
-		$this->db->from('aturan atr');
-		$this->db->join('penyakitcf p', 'p.kode_penyakitcf = atr.kode_penyakitcf');
-		$this->db->join('gejalacf g', 'g.kode_gejalacf = atr.kode_gejalacf');
-
-		return $this->db->get();
-	}
-
-	function add_basispengetahuan()
-	{
-
-		$data = array(
-			'id' => '',
-			'kode_penyakit' =>  $this->input->post('kode_penyakit'),
-			'kode_gejala' =>  $this->input->post('kode_gejala')
-		);
-
-		$this->db->insert('basispengetahuan', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function add_aturan()
-	{
-		$data = array(
-			'kode_gejalacf' =>  $this->input->post('kode_gejalacf'),
-			'kode_penyakitcf' =>  $this->input->post('kode_penyakitcf'),
-			'cfaturan' =>  $this->input->post('cfaturan')
-		);
-
-		$this->db->insert('aturan', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return = array('result' => 'success');
-		} else {
-			$return = array('result' => 'failed');
-		}
-		return $return;
-	}
-
-
-	function delete_basispengetahuan()
-	{
-
-
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->delete('basispengetahuan');
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	function delete_aturan()
-	{
-
-
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->delete('aturan');
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	public function edit_basispengetahuan()
-	{
-		$data = array(
-			'kode_penyakit' =>  $this->input->post('kode_penyakit'),
-			'kode_gejala' =>  $this->input->post('kode_gejala')
-		);
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->update('basispengetahuan', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	public function edit_aturan()
-	{
-		$data = array(
-			'kode_penyakitcf' =>  $this->input->post('kode_penyakitcf'),
-			'kode_gejalacf' =>  $this->input->post('kode_gejalacf'),
-			'cfaturan' =>  $this->input->post('cfaturan')
-		);
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->update('aturan', $data);
-
-		if ($this->db->affected_rows() > 0) {
-			$return =  array('result' => 'success');
-		} else {
-			$return =  array('result' => 'failed');
-		}
-		return $return;
-	}
-
-	public function get_bobot_pakar($kode_gejalacf)
-	{
-		$this->db->select('bobot_pakar');
-		$this->db->where('kode_gejalacf', $kode_gejalacf);
-		$query = $this->db->get('gejalacf');
-
-		if ($query->num_rows() > 0) {
-			$row = $query->row();
-			return $row->bobot_pakar;
-		} else {
-			return null;
-		}
-	}
-
-	public function get_cfaturan($kode_gejalacf)
-	{
-		$this->db->select('cfaturan');
-		$this->db->where('kode_gejalacf', $kode_gejalacf);
-		$query = $this->db->get('aturan');
-
-		if ($query->num_rows() > 0) {
-			$row = $query->row();
-			return $row->cfaturan;
-		} else {
-			return null;
-		}
-	}
-
-	public function get_penyakitcfaturan($kode_gejalacf)
-	{
-		$this->db->select('kode_penyakitcf');
-		$this->db->where('kode_gejalacf', $kode_gejalacf);
-		$query = $this->db->get('aturan');
-
-		if ($query->num_rows() > 0) {
-			$row = $query->row();
-			return $row->kode_penyakitcf;
-		} else {
-			return null;
-		}
-	}
-
-	public function get_hipotesis_gejala($kode_gejalacf)
-	{
-		$this->db->select('gejalacf.gejalacf');
-		$this->db->join('gejalacf', 'aturan.kode_gejalacf = gejalacf.kode_gejalacf');
-		$this->db->where('aturan.kode_gejalacf', $kode_gejalacf);
-		$query = $this->db->get('aturan');
-
-		if ($query->num_rows() > 0) {
-			$hipotesis = array();
-			foreach ($query->result() as $row) {
-				$hipotesis[] = $row->gejalacf;
-			}
-			return $hipotesis;
-		} else {
-			return null;
-		}
-	}
-
-	public function get_hipotesis_penyakit($kode_gejalacf)
-	{
-		$this->db->select('penyakitcf.kode_penyakitcf, penyakitcf.penyakitcf, penyakitcf.solusicf');
-		$this->db->join('penyakitcf', 'aturan.kode_penyakitcf = penyakitcf.kode_penyakitcf');
-		$this->db->where('aturan.kode_gejalacf', $kode_gejalacf);
-		$query = $this->db->get('aturan');
-
-		if ($query->num_rows() > 0) {
-			$hipotesis = array();
-			foreach ($query->result() as $row) {
-				$hipotesis[] = $row->penyakitcf;
-			}
-			return $hipotesis;
-		} else {
-			return null;
-		}
-	}
-
 
 	function get_by_id($id_member)
 	{
@@ -636,6 +68,278 @@ class model_admin extends CI_Model
 		$this->db->order_by('id_member', 'Desc');
 
 		return $this->db->get();
+	}
+
+	function add_member()
+	{
+
+		$data = array(
+			'username' => $this->input->post('username'),
+			'nama_member' => $this->input->post('nama_member'),
+			'password' => $this->input->post('password'),
+			'status_aktif' => 'N',
+		);
+
+		$this->db->insert('member', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	public function edit_member()
+	{
+		$data = array(
+			'username' => $this->input->post('username'),
+			'nama_member' => $this->input->post('nama_member'),
+			'password' => $this->input->post('password'),
+			'status_aktif' => 'Y',
+		);
+		$this->db->where('id_member', $this->input->post('id_member'));
+		$this->db->update('member', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function delete_member()
+	{
+
+		$this->db->where('id_member', $this->input->post('id_member'));
+		$this->db->delete('member');
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	public function getKRSbyDosen($id_member)
+	{
+		$this->db->select('k.id_krs, m.nama_member, k.nama_mhs, k.nim_mhs, k.prodi_mhs, k.tanggal, k.materi_bimbingan, k.tindak_lanjut');
+		$this->db->from('krs k');
+		$this->db->join('member m', 'k.id_member = m.id_member', 'left');
+		$this->db->where('k.id_member', $id_member);
+		return $this->db->get();
+	}
+
+	public function getKRSCountByDosen($id_member)
+	{
+		$this->db->where('id_member', $id_member);
+		return $this->db->count_all_results('krs');
+	}
+
+	public function getUTSCountByDosen($id_member)
+	{
+		$this->db->where('id_member', $id_member);
+		return $this->db->count_all_results('uts');
+	}
+
+	public function getUASCountByDosen($id_member)
+	{
+		$this->db->where('id_member', $id_member);
+		return $this->db->count_all_results('uas');
+	}
+
+	function add_krs()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->insert('krs', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function edit_krs()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->where('id_krs', $this->input->post('id_krs'));
+		$this->db->update('krs', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function delete_krs()
+	{
+		$this->db->where('id_krs', $this->input->post('id_krs'));
+		$this->db->delete('krs');
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	public function getUTSbyDosen($id_member)
+	{
+		$this->db->select('t.id_uts, m.nama_member, t.nama_mhs, t.nim_mhs, t.prodi_mhs, t.tanggal, t.materi_bimbingan, t.tindak_lanjut');
+		$this->db->from('uts t');
+		$this->db->join('member m', 't.id_member = m.id_member', 'left');
+		$this->db->where('t.id_member', $id_member);
+		return $this->db->get()->result();
+	}
+
+	function add_uts()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->insert('uts', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function edit_uts()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->where('id_uts', $this->input->post('id_uts'));
+		$this->db->update('uts', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function delete_uts()
+	{
+		$this->db->where('id_uts', $this->input->post('id_uts'));
+		$this->db->delete('uts');
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	public function getUASbyDosen($id_member)
+	{
+		$this->db->select('a.id_uas, m.nama_member, a.nama_mhs, a.nim_mhs, a.prodi_mhs, a.tanggal, a.materi_bimbingan, a.tindak_lanjut');
+		$this->db->from('uas a');
+		$this->db->join('member m', 'a.id_member = m.id_member', 'left');
+		$this->db->where('a.id_member', $id_member);
+		return $this->db->get()->result();
+	}
+
+	function add_uas()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->insert('uas', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return =  array('result' => 'success');
+		} else {
+			$return =  array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function edit_uas()
+	{
+		$data = array(
+			'nama_mhs' => $this->input->post('nama_mhs'),
+			'nim_mhs' => $this->input->post('nim_mhs'),
+			'prodi_mhs' => $this->input->post('prodi_mhs'),
+			'id_member' => $this->input->post('id_member'),
+			'tanggal' => $this->input->post('tanggal'),
+			'materi_bimbingan' => $this->input->post('materi_bimbingan'),
+			'tindak_lanjut' => $this->input->post('tindak_lanjut'),
+		);
+
+		$this->db->where('id_uas', $this->input->post('id_uas'));
+		$this->db->update('uas', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
+	}
+
+	function delete_uas()
+	{
+		$this->db->where('id_uas', $this->input->post('id_uas'));
+		$this->db->delete('uas');
+
+		if ($this->db->affected_rows() > 0) {
+			$return = array('result' => 'success');
+		} else {
+			$return = array('result' => 'failed');
+		}
+		return $return;
 	}
 
 	public function update($tabel, $data, $pk, $id)

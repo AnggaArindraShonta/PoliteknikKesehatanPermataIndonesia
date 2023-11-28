@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/kuliah/sistempakar/sp_padi/';
+$config['base_url'] = 'http://localhost/kerja/pkpi/';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,7 @@ $config['base_url'] = 'http://localhost/kuliah/sistempakar/sp_padi/';
 |
 */
 $config['index_page'] = '';
+
 
 /*
 |--------------------------------------------------------------------------
